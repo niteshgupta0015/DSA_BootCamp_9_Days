@@ -57,15 +57,4 @@ int main() {
 
     return 0;
 }
-Floor 3 has been requested.
-Floor 5 has been requested.
-Floor 1 has been requested.
-Moving from floor 0 to floor 3...
-Lift is going up.
-Arrived at floor 3.
-Moving from floor 3 to floor 5...
-Lift is going up.
-Arrived at floor 5.
-Moving from floor 5 to floor 1...
-Lift is going down.
-Arrived at floor 1.
+
