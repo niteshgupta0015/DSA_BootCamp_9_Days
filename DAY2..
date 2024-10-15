@@ -1,0 +1,100 @@
+#include <iostream>
+#include <queue>
+
+int main() {
+    std::queue<int> q;
+
+    q.push(1);  // Enqueue
+    q.push(2);
+    q.push(3);
+
+    std::cout << "Front element: " << q.front() << std::endl;  // Access front
+    q.pop();  // Dequeue
+    std::cout << "Front element after pop: " << q.front() << std::endl;
+
+    return 0;
+}
+
+
+#include <iostream>
+#define SIZE 5
+
+class CircularQueue {
+private:
+    int front, rear, arr[SIZE];
+
+public:
+    CircularQueue() : front(-1), rear(-1) {}
+
+    bool isFull() {
+        return (front == (rear + 1) % SIZE);
+    }
+
+    bool isEmpty() {
+        return (front == -1);
+    }
+
+    void enqueue(int value) {
+        if (isFull()) {
+            std::cout << "Queue is full\n";
+            return;
+        }
+        if (isEmpty()) {
+            front = rear = 0;
+        } else {
+            rear = (rear + 1) % SIZE;
+        }
+        arr[rear] = value;
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty\n";
+            return;
+        }
+        if (front == rear) {
+            front = rear = -1;  // Reset the queue
+        } else {
+            front = (front + 1) % SIZE;
+        }
+    }
+
+    int getFront() {
+        if (isEmpty()) return -1;
+        return arr[front];
+    }
+};
+
+int main() {
+    CircularQueue cq;
+    cq.enqueue(1);
+    cq.enqueue(2);
+    cq.enqueue(3);
+    std::cout << "Front element: " << cq.getFront() << std::endl;
+    cq.dequeue();
+    std::cout << "Front element after dequeue: " << cq.getFront() << std::endl;
+    return 0;
+}
+
+
+#include <iostream>
+#include <deque>
+
+int main() {
+    std::deque<int> dq;
+
+    dq.push_back(10);   // Insert at rear
+    dq.push_back(20);
+    dq.push_front(5);   // Insert at front
+
+    std::cout << "Front element: " << dq.front() << std::endl;  // Access front
+    std::cout << "Back element: " << dq.back() << std::endl;    // Access back
+
+    dq.pop_front();     // Remove from front
+    std::cout << "Front element after pop_front: " << dq.front() << std::endl;
+
+    dq.pop_back();      // Remove from rear
+    std::cout << "Back element after pop_back: " << dq.back() << std::endl;
+
+    return 0;
+}
