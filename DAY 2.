@@ -1,0 +1,100 @@
+#include <iostream>
+#define SIZE 5  
+
+class Queue {
+private:
+    int arr[SIZE];  
+    int front, rear;
+
+public:
+    Queue() {
+        front = -1;  
+        rear = -1;   
+    }
+
+   
+    bool isFull() {
+        return (rear + 1) % SIZE == front;
+    }
+
+    bool isEmpty() {
+        return front == -1;
+    }
+
+    
+    void enqueue(int value) {
+        if (isFull()) {
+            std::cout << "Queue is full! Cannot enqueue " << value << std::endl;
+            return;
+        }
+        if (isEmpty()) {
+            front = 0;  
+        }
+        rear = (rear + 1) % SIZE;  
+        arr[rear] = value;
+        std::cout << "Enqueued " << value << std::endl;
+    }
+
+  
+    void dequeue() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty! Cannot dequeue." << std::endl;
+            return;
+        }
+        std::cout << "Dequeued " << arr[front] << std::endl;
+        if (front == rear) {
+           
+            front = -1;
+            rear = -1;
+        } else {
+            front = (front + 1) % SIZE;  
+        }
+    }
+
+    // Get the front element of the queue without removing it
+    int getFront() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty!" << std::endl;
+            return -1;
+        }
+        return arr[front];
+    }
+
+    // Print the current queue
+    void printQueue() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty!" << std::endl;
+            return;
+        }
+
+        std::cout << "Queue elements: ";
+        for (int i = front; i != rear; i = (i + 1) % SIZE) {
+            std::cout << arr[i] << " ";
+        }
+        std::cout << arr[rear] << std::endl;
+    }
+};
+
+int main() {
+    Queue q;
+
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    q.enqueue(50);
+
+    q.printQueue();
+
+    q.dequeue();
+    q.dequeue();
+
+    q.printQueue();
+
+    q.enqueue(60);
+    q.printQueue();
+
+    std::cout << "Front element: " << q.getFront() << std::endl;
+
+    return 0;
+}
