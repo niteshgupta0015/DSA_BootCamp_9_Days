@@ -1,0 +1,71 @@
+#include <iostream>
+#include <queue>
+#include <cmath>
+
+class Lift {
+private:
+    int currentFloor;
+    std::queue<int> requests;
+    
+public:
+    Lift(int startFloor = 0) : currentFloor(startFloor) {}
+    
+    void addRequest(int floor) {
+        if (floor != currentFloor) {
+            requests.push(floor);
+            std::cout << "Floor " << floor << " has been requested." << std::endl;
+        }
+    }
+    
+    void processRequests() {
+        while (!requests.empty()) {
+            int nextFloor = requests.front();
+            requests.pop();
+            
+            moveLift(nextFloor);
+        }
+    }
+
+    void moveLift(int nextFloor) {
+        std::cout << "Moving from floor " << currentFloor << " to floor " << nextFloor << "..." << std::endl;
+        
+        int distance = abs(nextFloor - currentFloor);
+        
+        if (nextFloor > currentFloor) {
+            std::cout << "Lift is going up." << std::endl;
+        } else {
+            std::cout << "Lift is going down." << std::endl;
+        }
+        
+        currentFloor = nextFloor;
+        std::cout << "Arrived at floor " << currentFloor << "." << std::endl;
+    }
+
+    int getCurrentFloor() const {
+        return currentFloor;
+    }
+};
+
+int main() {
+    Lift lift(0);  // Initialize lift at ground floor (0)
+
+    lift.addRequest(3);  // Request to move to floor 3
+    lift.addRequest(5);  // Request to move to floor 5
+    lift.addRequest(1);  // Request to move to floor 1
+    
+    lift.processRequests();  // Process all requests in the queue
+
+    return 0;
+}
+Floor 3 has been requested.
+Floor 5 has been requested.
+Floor 1 has been requested.
+Moving from floor 0 to floor 3...
+Lift is going up.
+Arrived at floor 3.
+Moving from floor 3 to floor 5...
+Lift is going up.
+Arrived at floor 5.
+Moving from floor 5 to floor 1...
+Lift is going down.
+Arrived at floor 1.
